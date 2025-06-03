@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <title>InterActiMation</title>
+    <link rel="icon" type="image/png" href="favicon_iam.png" sizes="16x16">
+
+  
+  <style>
+  body {
+          margin: 0;
+    font-family: Arial, Helvetica, sans-serif
+    
+          background-color: red; /* For browsers that do not support gradients */
+          background-image: linear-gradient(gold, red ); /* Standard syntax (must be last) */
+  }
+
+  h1 
+    {
+      color: DarkSlateGrey;
+    }
+    
+  h2
+    {
+    color: DarkSlateGrey;
+    }
+    
+    /* Style the header */
+header {
+  background-color: yellow;
+  padding: 0px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+    
+</style>
+  
+</head>
+<body>
+<!--Flaming Eyebrows--> 
+<canvas id="eyeswide"></canvas>
+  
+<header>
+  <h1>InterActiMation</h1>
+</header>
+  
+  
+<div style="text-align:center">
+
+<h1>~ A SCHOOL ~</h1>
+  <a href="https://glitch.com/@IAM"><img src="/images/schoolBotton.jpg"  width="163" height="200"></a>
+<h1>~ A STUDIO ~</h1>
+<p>
+    
+    <!--puppet botton-->
+      <a href="puppetgallery.html"><canvas  id="puppetCanv"  width="163" height="200"></canvas></a>
+  
+    <img id="puppetBG"
+         style="display:none"
+         src="/images/puppets/puppetsBottonBase.png">
+      
+    <img id="puppetOL" 
+       style="display:none"
+       src="/images/puppets/puppetsBottonFadein.png"> 
+      
+      <!--head botton-->
+      <a href="colossalheads.html"><img src="/images/heads/colossalHeadBotton.gif"  width="163" height="200"></a> 
+          
+          
+      <!--anim botton-->
+      <a href="https://www.youtube.com/user/FalseFeatures"><img src="/images/animBottun.gif"  width="163" height="200"></a>
+            
+    </p>  
+   
+
+
+<h2>Interactimation is an approach to Interactive Objects</h2> 
+<h3>Web-Based Sculptural Interfaces</h3>
+
+
+<!--erything between the script open and close tags is javascript-->  
+<script>
+  
+  
+  //buttons
+    var puppet_canv = document.getElementById("puppetCanv");
+    var puppet_ctx = puppet_canv.getContext("2d");
+    var puppetBase = document.getElementById('puppetBG');
+    var puppetOverlay = document.getElementById('puppetOL')
+   
+    var fader = 0;
+    var faderToggle = 0.015;
+       
+    function puppetAnim(){
+      
+      
+      puppet_ctx.clearRect(0, 0, 163, 200);
+      puppet_ctx.globalAlpha = 1;
+      puppet_ctx.drawImage(puppetBase, 50, 0, 512, 512, 0, 0, 200, 200);
+      puppet_ctx.globalAlpha = fader;
+      puppet_ctx.drawImage(puppetOverlay, 50, 0, 512, 512, 0, 0, 200, 200);
+      fader += faderToggle;
+      if(fader > 1 || fader < -0.1){
+      
+        faderToggle *= -1;
+        
+        
+      }
+      window.requestAnimationFrame(puppetAnim);
+    }
+    
+    puppetAnim()
+  
+  
+
+//CANVAS CONTEXTS
+//context canvas flicker 01
+
+var canvFlkr01 = document.createElement('canvas');
+canvFlkr01.width ="150";
+canvFlkr01.height ="150";
+var ctxFlkr01 = canvFlkr01.getContext("2d");
+  
+//context canvas flicker 02
+var canvFlkr02 = document.createElement('canvas');
+canvFlkr02.width ="150";
+canvFlkr02.height ="150";  
+var ctxFlkr02 = canvFlkr02.getContext("2d");
+
+//context canvas flicker 03
+var canvFlkr03 = document.createElement('canvas');
+canvFlkr03.width ="150";
+canvFlkr03.height ="150";    
+var ctxFlkr03 = canvFlkr03.getContext("2d"); 
+
+//context canvas Fire Brow
+var canvFB = document.createElement('canvas');
+var ctxFB = canvFB.getContext("2d");
+  
+  
+//context canvas Shadow Brow
+var canvSB = document.createElement('canvas');
+var ctxSB = canvSB.getContext("2d");
+  //shadow glow
+  ctxSB.shadowBlur = 10;
+  ctxSB.shadowColor = "black";
+  
+//context canvas Desat Brow
+var canvDB = document.createElement('canvas');
+var ctxDB = canvDB.getContext("2d"); 
+  //filters
+  ctxDB.filter = 'blur(10px) grayscale(0.15) opacity(1) invert(0.45) drop-shadow(0px 8px 12px)'
+  
+  
+var canvBB = document.createElement('canvas');
+  canvBB.width = 300;
+  canvBB.height = 300;
+var ctxBB = canvBB.getContext("2d"); 
+  
+  
+//context canvas eyeswide
+var canvEW = document.getElementById('eyeswide');
+  canvEW.width=window.innerWidth;
+  canvEW.height=window.innerHeight/3;
+var ctxEW = canvEW.getContext("2d");  
+  
+  function drawCompositeBrow()
+  {
+    ctxEW.clearRect(0, 0, canvEW.width, canvEW.height);  
+  
+    ctxEW.drawImage(canvBB, canvEW.width/1.9, -canvEW.height/4, canvEW.width/4, canvEW.height);
+    ctxEW.save();
+    ctxEW.translate(canvEW.width, 0);
+ctxEW.scale(-1, 1);
+
+    ctxEW.drawImage(canvBB, canvEW.width/1.9, -canvEW.height/4, canvEW.width/4, canvEW.height);
+    ctxEW.restore();
+ 
+
+  }
+  
+
+//GLOBAL VARIABLES FOR CANVAS FLICKER 01
+  
+//flicker 01 handles
+var f01h01x = 0;
+var f01h01y = 0;
+var f01h02x = 300;
+var f01h02y = 300;
+  
+//flicker 01 flipper
+var f01flip = 1;
+
+//flicker 01 factors 
+var f01h01xFac = 38-(Math.random()*6.2);
+var f01h01yFac = 22-(Math.random()*8.2); 
+var f01h02xFac = 40-(Math.random()*8.2);
+var f01h02yFac = 2.83-(Math.random()*1.2);
+
+var flicker01number = 0;
+
+//DRAW FLIKER 01
+function drawFlkr01()
+{  
+  ctxFlkr01.fillStyle ='#ff0000';
+  ctxFlkr01.beginPath();
+  ctxFlkr01.moveTo(0, 150);
+  ctxFlkr01.bezierCurveTo(f01h01x, f01h01y, f01h02x, f01h02y, 150, 125);
+  ctxFlkr01.closePath();
+  ctxFlkr01.fill();
+  
+  //increment these handle factors every frame
+  f01h01x += f01h01xFac;
+  f01h01y -= f01h01yFac;
+  f01h02x -= f01h02xFac;
+  f01h02y -= f01h02yFac;
+  
+    //flip Flicker 01
+    if (f01h01x > 400 || f01h01x < 0)
+    {
+    flicker01number +=1;
+    ctxFlkr01.clearRect(0, 0, 150, 150); 
+    f01h01xFac *= -1;  
+    f01h01yFac *= -1; 
+    f01h02xFac *= -1; 
+    f01h02yFac *= -1;
+    } 
+  
+    //change flicker 01 shape
+    if (flicker01number > 7)
+    {
+    ctxFlkr01.clearRect(0, 0, 150, 150);
+    flicker01number = 0;
+    f01h01xFac = 38-(Math.random()*6.2);
+    f01h01yFac = 22-(Math.random()*8.2); 
+    f01h02xFac = 40-(Math.random()*8.2);
+    f01h02yFac = 2.83-(Math.random()*1.2);
+    }
+}
+  
+//GLOBAL VARIABLES FOR CANVAS FLICKER 02
+
+var f02Peaky = 150; 
+var f02Ly = 150;
+var f02Lx = 0;
+var f02Ry = 150;
+var f02Rx = 150;
+  
+// fliker 02 flipper 
+var f02flip = 1;
+  
+
+//DRAW FLIKER 02
+function drawFlkr02()
+{ 
+  var f02reverse = 24 + (Math.random()*10);
+  
+  //ctxFlkr02.clearRect(0, 0, 150, 150);
+  ctxFlkr02.strokeStyle ='#ff0000';
+  ctxFlkr02.fillStyle ='#ff0000';
+  ctxFlkr02.beginPath();
+  ctxFlkr02.moveTo(65, 150);
+  ctxFlkr02.bezierCurveTo(0, 150, 10, 90, f02Lx, f02Ly);
+  ctxFlkr02.lineTo(100, f02Peaky);
+  ctxFlkr02.bezierCurveTo(150, 150, 150, 150, f02Rx, f02Ry);
+  ctxFlkr02.closePath();
+  //ctxFlkr02.closePath();
+  //ctxFlkr02.fill();
+  ctxFlkr02.fill();
+  
+  //increment these  positions every frame
+  f02Peaky -= 7;
+  f02Ly -= 1.50;
+  f02Ry -= 1.50;
+  f02Lx += 6;
+  f02Rx -= 6;
+  
+  //reset FLicker 02
+  f02flip += 1;
+  
+  if (f02flip > f02reverse)
+  {
+  ctxFlkr02.clearRect(0, 0, 150, 150);
+  f02Peaky = 150; 
+  f02Ly = 150;
+  f02Lx = 0;
+  f02Ry = 150;
+  f02Rx = 150;
+  
+  f02flip = 0;
+  }
+}
+ 
+  // GLOBAL VARIABLES FOR CANVAS FLICKER 03
+ 
+  var f02x = 50;
+  var f02y = 20;
+  
+  var f03flip = 6;
+  var f03count = 0;
+  
+  
+ //DRAW FLICKER 03
+  function drawFlkr03()
+  {
+  f03count += 1;
+  ctxFlkr03.clearRect(0, 0, 150, 150);
+  ctxFlkr03.strokeStyle = '#ff0000';
+  ctxFlkr03.fillStyle = '#ff0000';
+  ctxFlkr03.beginPath();
+  ctxFlkr03.moveTo(0, 75);
+  ctxFlkr03.bezierCurveTo(50, 50, 100, 75, 75, f02x);
+  ctxFlkr03.bezierCurveTo( 100, 750, 150, 40, 150, f02y);
+  ctxFlkr03.bezierCurveTo( 50, 150, 100, 75, 0, f02y);
+  
+  ctxFlkr03.fill();
+  f02y += f03flip;
+  f02x -= f03flip; 
+    
+    if (f03count > 10)
+    {
+      f03flip *= -1;
+      //f02x = 75;
+      //f02y = 50;
+      f03count = 0;
+    } 
+  }  
+  
+//DRAW THE FIRE BROW
+function drawFB() 
+{    
+
+    //fire glow
+  ctxFB.shadowBlur =8*Math.random();
+  ctxFB.shadowColor = "red"; 
+  
+  //clear the canvas
+  ctxFB.clearRect(0, 0, 300, 150); 
+  
+  //flickers01
+  ctxFB.drawImage(canvFlkr01, 17, 40, 50, 75);
+  ctxFB.drawImage(canvFlkr01, 0, 0, 150, 120, 100, 40, 40, 55);
+  ctxFB.drawImage(canvFlkr01, 200, 46, 25, 35); 
+  
+  //flickers02
+  ctxFB.drawImage(canvFlkr02, 30, 0, 150, 118, 35, 33, 90, 70);   
+  ctxFB.drawImage(canvFlkr02, 30, 0, 150, 118, 45, 45, 120, 60);
+  ctxFB.drawImage(canvFlkr02, 0, 0, 150, 118, 114, 16, 60, 70);
+  ctxFB.drawImage(canvFlkr02, 0, 0, 150, 118, 142, 30, 60, 50);
+  
+  //flickers03
+  ctxFB.drawImage(canvFlkr03, 59, 0, 150, 90, 70, 80, 60, 35);
+  ctxFB.drawImage(canvFlkr03, 12, 0, 150, 110, 53, 80, 50, 35);
+  ctxFB.drawImage(canvFlkr03, 30, 0, 150, 75, 137, 66, 60, 23);
+  ctxFB.drawImage(canvFlkr03, 83, 0, 150, 114, 150, 35, 50, 55);
+  ctxFB.drawImage(canvFlkr03, 83, 0, 150, 114, 180, 25, 50, 55);
+  ctxFB.drawImage(canvFlkr03, 83, 0, 150, 114, 125, 60, 50, 30);
+
+  //draw eyebrow
+  
+  //brow anchor circle
+  ctxFB.strokeStyle ='#ff0000';
+  ctxFB.fillStyle ='#ff0000';
+  ctxFB.beginPath();
+  ctxFB.arc(46, 110, 32, 0, 1.30 * Math.PI);
+  ctxFB.fill();
+  //brow arch
+  ctxFB.beginPath();
+  ctxFB.moveTo(38, 140);
+  ctxFB.bezierCurveTo(120, 160, 180, 10, 290, 140);
+  ctxFB.lineTo(284, 122);
+  ctxFB.lineTo(214, 68);
+  ctxFB.lineTo(30, 106);
+  ctxFB.closePath();
+  ctxFB.stroke();
+  ctxFB.fill()
+} 
+  
+
+  //SHADOW BROW
+  //copy pixels from Fire Brow to Shadow Brow
+  function copyFBtoSB() 
+  {    
+  // draw the whole Fire Brow canvas into the Shadow Brow canvas  
+  ctxSB.clearRect(0, 0, 300, 150);  
+  ctxSB.drawImage(canvFB, 0, 0, 300, 216, 0, 0, 300, 150);
+  }
+ 
+      //DESAT BROW
+  
+  //
+    function copyBBtoDB() 
+  {    
+  // draw the whole MokeBrow canvas into the Shadow Brow canvas, desturate  
+    
+  //ctxDB.filter = "(1)";
+  ctxDB.clearRect(0, 0, 300, 150);  
+  ctxDB.drawImage(canvSB, 0, 0, 300, 150, 20, 0, 250, 150);
+  }
+  
+  //BILLOWS BROW
+  
+  var grd = ctxBB.createRadialGradient(0, 157, 115, 50, 50, 0);
+  grd.addColorStop(0, "red");
+  grd.addColorStop(1, "lightyellow");
+  var riserY= 260;
+  var slowRiser = 260;
+  riserRad = 0;
+  riserOff =0;
+  slowRiseX = 50;
+  
+  //
+    function billows() 
+  {    
+  // draw the whole Fire Brow canvas into the Shadow Brow canvas 
+  ctxBB.clearRect(0, 0, 300, 400);
+  ctxBB.fill();
+  ctxBB.globalAlpha = 0.1;
+  ctxBB.fillStyle = grd;
+  ctxBB.beginPath();
+  ctxBB.arc(220+riserOff, riserY-10, riserRad, 0, 2 * Math.PI);
+  ctxBB.fill();
+  ctxBB.drawImage(canvDB, 0, 0, 300, 150, 10, 100, 280, 150);
+  ctxBB.globalAlpha = 0.3;
+  ctxBB.beginPath();
+  ctxBB.arc(100+riserOff, riserY, riserRad/1.50, 0, 2 * Math.PI);
+  ctxBB.fill();
+  ctxBB.drawImage(canvDB, 0, 0, 300, 150, 5, 130, 250, 150);
+  ctxBB.globalAlpha = 0.5;
+  ctxBB.drawImage(canvDB, 0, 0, 300, 150, 3, 150, 150, 150); 
+  ctxBB.globalAlpha = 0.7;
+  ctxBB.beginPath();
+  ctxBB.arc(slowRiseX, slowRiser+20, riserRad/4, 0, 2 * Math.PI);
+  ctxBB.fill();
+  ctxBB.beginPath();
+  ctxBB.arc(200+riserOff, riserY-30, riserRad, 0, 2 * Math.PI);
+  ctxBB.fill();
+  ctxBB.drawImage(canvDB, 0, 0, 300, 150, 0, 160, 300, 150);
+  ctxBB.globalAlpha = 1;
+  ctxBB.drawImage(canvSB, 0, 0, 300, 150, 0, 180, 300, 150);
+    
+  riserY -= 4;
+  slowRiser -= 3;
+  riserRad += Math.random()/2;
+    
+  if (slowRiser <= 20)
+  {
+    slowRiseX += 2.3;
+    slowRiser = 260; 
+    riserY = 250;
+    riserRad = Math.random()/2;
+    riserOff += (20*Math.random()/2);
+    
+  }
+    
+  if (riserOff >= 100)
+  {
+    riserOff = 0;
+    slowRiseX = 50;
+  }
+  }
+  
+  
+   //resize reloads page 
+document.getElementsByTagName("BODY")[0].onresize = function() 
+{
+canvEW.width=window.innerWidth;
+canvEW.height=window.innerHeight/3;
+};
+  
+//ANIMATE//
+function ani() 
+{
+  //gets every frame
+  requestAnimationFrame(ani);
+
+  //calls these functions every frame
+  drawFlkr01();
+  drawFlkr02();
+  drawFlkr03()
+  drawFB();
+  copyFBtoSB();
+  copyBBtoDB(); 
+  billows();
+  drawCompositeBrow();
+ 
+} 
+  
+//call the animate funtion    
+ani();
+  
+</script> 
+
+</body>
+</html>
